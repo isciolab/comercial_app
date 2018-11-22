@@ -16,14 +16,18 @@ import { Auth } from '../providers/auth/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
+import { Media } from '@ionic-native/media';
+import { File } from '@ionic-native/file';
+
 // add your info here
 export const firebaseConfig = {
-  apiKey: "AIzaSyAbD19sI5Xz_jKjEMCQhjuYXVPrdn3YEsY",
-  authDomain: "codelab-22299.firebaseapp.com",
-  databaseURL: "https://codelab-22299.firebaseio.com",
-  projectId: "codelab-22299",
-  storageBucket: "codelab-22299.appspot.com",
-  messagingSenderId: "141181591031"
+  apiKey: "AIzaSyCkjeGo8ovErLNrFEmxm4ph_fNpVPE8nf4",
+  authDomain: "comercial-demo.firebaseapp.com",
+  databaseURL: "https://comercial-demo.firebaseio.com",
+  projectId: "comercial-demo",
+  storageBucket: "comercial-demo.appspot.com",
+  messagingSenderId: "84164771322"
+
 };
 
 
@@ -52,6 +56,7 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
+    Media,
     Auth
   ]
 })
