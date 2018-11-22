@@ -1,0 +1,41 @@
+<ion-navbar primary *navbar>
+  <ion-title>
+    Reset your Password
+  </ion-title>
+</ion-navbar>
+
+
+<ion-content padding class="reset-password">
+  <ion-item>
+      <div align="center"><span class="header">Forgot</span><br/>
+      <div class="iconlogin"><ion-icon name="refresh-circle"></ion-icon>
+</div>
+      </div>
+    </ion-item>
+
+  <form [formGroup]="resetPasswordForm" (ngSubmit)="resetPassword($event)" novalidate>
+
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input #email formControlName="email" type="email"
+        placeholder="Email"
+        [class.invalid]="!resetPasswordForm.controls.email.valid && (emailChanged || submitAttempt)"></ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!resetPasswordForm.controls.email.valid  && (emailChanged || submitAttempt)">
+      <p>Please enter a valid email.</p>
+    </ion-item>
+
+    <button ion-button block type="submit">
+      Reset your Password
+    </button>
+
+  </form>
+  <ion-item>
+  <div align="center">
+    <button ion-button small clear (click)="goToLogin()">
+      Back
+    </button>
+    </div>
+  </ion-item>
+
+</ion-content>
