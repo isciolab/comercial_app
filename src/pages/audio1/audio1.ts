@@ -31,6 +31,7 @@ export class Audio1Page {
   }
 
   ionViewDidLoad() {
+    this.getAudioList();
     console.log('ionViewDidLoad Audio1Page');
   }
 
@@ -53,9 +54,9 @@ export class Audio1Page {
     this.audio.startRecord();
     this.recording = true;
   }
-  ionViewWillEnter() {
+  /*ionViewWillEnter() {
     this.getAudioList();
-  }
+  }*/
   stopRecord() {
     this.audio.stopRecord();
     let data = { filename: this.fileName };

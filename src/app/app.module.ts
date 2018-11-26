@@ -18,6 +18,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
+import {ExperiencesPage} from "../pages/experiences/experiences";
 
 // add your info here
 export const firebaseConfig = {
@@ -43,7 +44,8 @@ export const firebaseConfig = {
     HomePage,
     LoginPage,
     ForgotPage,
-    RegisterPage
+    RegisterPage,
+    ExperiencesPage
   ],
   bootstrap: [IonicApp],
   entryComponents: [

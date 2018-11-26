@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, forwardRef, Inject, Input} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {ExperienciaPage} from "../experiencia/experiencia";
 
 /**
  * Generated class for the GeneralPage page.
@@ -14,8 +15,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'general.html',
 })
 export class GeneralPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  @Input() parent;
+  experience = {};
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              @Inject(forwardRef(() => ExperienciaPage)) private _parent:ExperienciaPage) {
+    this.experience = _parent.experience;
   }
 
   ionViewDidLoad() {

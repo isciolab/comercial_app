@@ -7,6 +7,7 @@
 <ion-header>
 
   <ion-navbar>
+
     <ion-title>General</ion-title>
   </ion-navbar>
 
@@ -18,17 +19,17 @@
   <ion-list>
     <ion-item>
       <ion-label color="primary" floating>¿Dónde te reuniste?</ion-label>
-      <ion-input placeholder=""></ion-input>
+      <ion-input placeholder="" [(ngModel)]="experience.lugar"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label color="primary" floating>¿Con quién te reuniste?</ion-label>
-      <ion-input placeholder=""></ion-input>
+      <ion-input placeholder="" [(ngModel)]="experience.cliente"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>¿Le pediste datos?</ion-label>
-      <ion-toggle [(ngModel)]="pepperoni"></ion-toggle>
+      <ion-toggle [(ngModel)]="pepperoni" [(ngModel)]="experience.pediste_datos"></ion-toggle>
     </ion-item>
 
   </ion-list>

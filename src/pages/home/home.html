@@ -1,13 +1,26 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-    <button ion-button small clear (click)="logOut()">Logout</button>
+  <ion-navbar hideBackButton="true">
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>
+      Home
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button small clear icon-end icon-only (click)="logOut()">
+        <ion-icon name='md-log-out'></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding class="home">
   <h2>Bienvenido</h2>
 
-  <a  ion-button small  (click)="llamar()">Llamar cliente</a>
-  <a  ion-button small  href="#/experience">Registrar experiencia de reunion</a>
+  <a ion-button small (click)="llamar()">Llamar cliente</a>
+  <a ion-button small href="#/experience">Registrar experiencia de reunion</a>
+
+
 </ion-content>
+
+

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {MenuController, NavController} from 'ionic-angular';
 import {Auth} from '../../providers/auth/auth';
 import {LoginPage} from '../login/login';
 
@@ -9,13 +9,29 @@ import {LoginPage} from '../login/login';
 })
 export class HomePage {
   //private rootPage: any = StartPage;
-  constructor( public nav: NavController, public authData: Auth) {
-  this.authData = authData;
+  constructor(public nav: NavController, public authData: Auth,
+              public menuCtrl: MenuController) {
+    this.authData = authData;
+    menuCtrl.enable(true);
+
+
   }
 
- logOut(){
-  this.authData.logoutUser().then(() => {
-    this.nav.setRoot(LoginPage);
-  });
-}
+  logOut() {
+    this.authData.logoutUser().then(() => {
+      this.nav.setRoot(LoginPage);
+    });
+  }
+
+  openMenu() {
+    this.menuCtrl.open();
+  }
+
+  closeMenu() {
+    this.menuCtrl.close();
+  }
+
+  toggleMenu() {
+    this.menuCtrl.toggle();
+  }
 }
