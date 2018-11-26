@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NativeStorage} from '@ionic-native/native-storage';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {HomePage} from "../home/home";
 
 /**
  * Generated class for the ExperiencesPage page.
@@ -8,18 +10,39 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+
+  name: 'Experiencias',
+  segment: 'experiencias'
+
+})
 @Component({
   selector: 'page-experiences',
   templateUrl: 'experiences.html',
 })
 export class ExperiencesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  experiences = {};
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private nativeStorage: NativeStorage) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ExperiencesPage');
+    this.nativeStorage.getItem('experiences')
+      .then(
+        data => this.renderData(data),
+        error => console.error(error)
+      );
+
+
   }
 
+  renderData(data){
+    this.experiences=data;
+    console.log(this.experiences);
+  }
+  gotoHome(){
+    this.navCtrl.push(HomePage);
+  }
 }

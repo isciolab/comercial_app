@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { ForgotPage } from '../pages/forgot/forgot';
 import { RegisterPage } from '../pages/register/register';
+import {ExperiencesPage} from "../pages/experiences/experiences";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,7 +19,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
-import {ExperiencesPage} from "../pages/experiences/experiences";
+import {NativeStorage} from "@ionic-native/native-storage";
+import {ExperienciaPage} from "../pages/experiencia/experiencia";
+
 
 // add your info here
 export const firebaseConfig = {
@@ -53,13 +56,15 @@ export const firebaseConfig = {
     HomePage,
     LoginPage,
     ForgotPage,
-    RegisterPage
+    RegisterPage,
+    ExperiencesPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Media,
-    Auth
+    Auth,
+    NativeStorage
   ]
 })
 export class AppModule { }

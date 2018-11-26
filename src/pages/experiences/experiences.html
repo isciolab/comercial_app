@@ -5,7 +5,11 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
+  <ion-buttons left>
+    <button ion-button small clear icon-end icon-only (click)="gotoHome()">
+      <ion-icon name='md-home'></ion-icon>
+    </button>
+  </ion-buttons>
   <ion-navbar>
     <ion-title>experiences</ion-title>
   </ion-navbar>
@@ -14,5 +18,9 @@
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item ion-item *ngFor="let exprience of experiences">
+      {{exprience.lugar}}
+    </ion-item>
+  </ion-list>
 </ion-content>

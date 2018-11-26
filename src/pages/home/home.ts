@@ -17,6 +17,9 @@ export class HomePage {
 
   }
 
+  llamar(){
+
+  }
   logOut() {
     this.authData.logoutUser().then(() => {
       this.nav.setRoot(LoginPage);

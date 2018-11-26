@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController} from 'ionic-angular';
 import {NativeStorage} from "@ionic-native/native-storage";
 import {HomePage} from "../home/home";
 
@@ -24,22 +24,38 @@ export class ExperienciaPage {
   generalRoot = 'GeneralPage'
   audio1Root = 'Audio1Page'
   audio2Root = 'Audio2Page'
-  experience = {}
+  experiences = new Array();
+  experience = {};
 
-  constructor(public navCtrl: NavController, private nativeStorage: NativeStorage) {}
+  constructor(public navCtrl: NavController, private nativeStorage: NativeStorage) {
+  }
 
-  saveExperience(){
+  saveExperience() {
     console.log(this.experience);
-    this.nativeStorage.setItem('experience', this.experience)
-      .then(
 
+    this.nativeStorage.getItem('experiences')
+      .then(
+        data => this.addItem(data),
+        error => this.addItem(new Array())
+      );
+
+
+  }
+
+  saveSuccess() {
+    console.log('Stored item!');
+    this.navCtrl.push(HomePage);
+  }
+
+  addItem(data) {
+
+    this.experiences = data;
+    this.experiences.push(this.experience);
+
+    this.nativeStorage.setItem('experiences', this.experiences)
+      .then(
         () => this.saveSuccess(),
         error => console.error('Error storing item', error)
       );
-  }
-
-  saveSuccess(){
-    console.log('Stored item!');
-    this.navCtrl.push(HomePage);
   }
 }
