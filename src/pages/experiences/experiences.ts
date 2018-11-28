@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NativeStorage} from '@ionic-native/native-storage';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {HomePage} from "../home/home";
+import {RestProvider} from "../../providers/rest/rest";
 
 /**
  * Generated class for the ExperiencesPage page.
@@ -22,9 +23,10 @@ import {HomePage} from "../home/home";
 })
 export class ExperiencesPage {
 
-  experiences = {};
+  experiences: Array<any>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private nativeStorage: NativeStorage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private nativeStorage: NativeStorage,
+    public restProvider: RestProvider) {
   }
 
   ionViewDidLoad() {
@@ -38,11 +40,22 @@ export class ExperiencesPage {
 
   }
 
-  renderData(data){
-    this.experiences=data;
-    console.log(this.experiences);
+  renderData(data) {
+
+    this.experiences = data;
+
+
   }
-  gotoHome(){
+
+  gotoHome() {
     this.navCtrl.push(HomePage);
+  }
+
+  sendExperiences() {
+    this.restProvider.sendExperiences(this.experiences)
+      .then(data => {
+
+        console.log(data);
+      });
   }
 }

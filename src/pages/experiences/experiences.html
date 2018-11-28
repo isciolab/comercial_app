@@ -5,22 +5,29 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-buttons left>
-    <button ion-button small clear icon-end icon-only (click)="gotoHome()">
-      <ion-icon name='md-home'></ion-icon>
-    </button>
-  </ion-buttons>
+
   <ion-navbar>
-    <ion-title>experiences</ion-title>
+    <ion-buttons left>
+      <button ion-button small clear icon-end icon-only (click)="gotoHome()">
+        <ion-icon name='md-home'></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Experiencias</ion-title>
+    <ion-buttons end>
+      <button ion-button small clear icon-end icon-only (click)="sendExperiences()">
+        <ion-icon name='md-sync'></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list>
+  <ion-list inset>
     <ion-item ion-item *ngFor="let exprience of experiences">
-      {{exprience.lugar}}
+      <h2>{{exprience.cliente}}</h2>
+      <p>{{exprience.lugar}}</p>
     </ion-item>
   </ion-list>
 </ion-content>

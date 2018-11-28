@@ -21,7 +21,8 @@ import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
 import {NativeStorage} from "@ionic-native/native-storage";
 import {ExperienciaPage} from "../pages/experiencia/experiencia";
-
+import { HttpClientModule } from '@angular/common/http';
+import { RestProvider } from '../providers/rest/rest';
 
 // add your info here
 export const firebaseConfig = {
@@ -38,9 +39,11 @@ export const firebaseConfig = {
 @NgModule({
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule
+
   ],
   declarations: [
     MyApp,
@@ -64,7 +67,8 @@ export const firebaseConfig = {
     SplashScreen,
     Media,
     Auth,
-    NativeStorage
+    NativeStorage,
+    RestProvider
   ]
 })
 export class AppModule { }
