@@ -17,21 +17,36 @@ export class RestProvider {
     console.log('Hello RestProvider Provider');
   }
 
-  sendExperiences(experiences) {
+  sendExperiences(exp) {
 
-    console.log(experiences);
-    this.experiences = experiences;
+    console.log(exp);
 
-    let exp = this.experiences[0];
-    console.log(this.experiences);
 
     let headers = new HttpHeaders().set('Content-Type', 'multipart/form-data;boundary=----');
     let formData = new FormData();
 
     formData.append('lugar', exp.lugar);
     formData.append('cliente', exp.cliente);
-    formData.append('user', "test");
-    formData.append('pediste_info', "1");
+    formData.append('user', exp.user);
+    formData.append('pediste_info', exp.pediste_datos?'1':'0');
+    if(exp.audio1!=undefined) {
+      try {
+        console.log(exp.audio1);
+        formData.append('audio1', exp.audio1.filename);
+        formData.append('uploaded_file', new Blob(exp.audio1.file), exp.audio1.filename);
+      }catch {
+        console.log('no se paso el audio');
+      }
+    }
+    if(exp.audio2!=undefined) {
+      try {
+      console.log(exp.audio1);
+      formData.append('audio2', exp.audio2.filename);
+      formData.append('uploaded_file2', new Blob(exp.audio2.file), exp.audio2.filename);
+      }catch {
+        console.log('no se paso el audio');
+      }
+    }
     return new Promise((resolve, reject) => {
 
       this.http.post(this.apiUrl + 'experience/register', formData, {

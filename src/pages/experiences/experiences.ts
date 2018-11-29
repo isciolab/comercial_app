@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NativeStorage} from '@ionic-native/native-storage';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {HomePage} from "../home/home";
 import {RestProvider} from "../../providers/rest/rest";
 
@@ -26,7 +26,8 @@ export class ExperiencesPage {
   experiences: Array<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private nativeStorage: NativeStorage,
-    public restProvider: RestProvider) {
+              public restProvider: RestProvider, private toastCtrl: ToastController) {
+    // this.nativeStorage.setItem('experiences', this.experiences);
   }
 
   ionViewDidLoad() {
@@ -36,14 +37,13 @@ export class ExperiencesPage {
         data => this.renderData(data),
         error => console.error(error)
       );
-
-
   }
 
   renderData(data) {
 
     this.experiences = data;
 
+    console.log(data);
 
   }
 
@@ -52,10 +52,43 @@ export class ExperiencesPage {
   }
 
   sendExperiences() {
-    this.restProvider.sendExperiences(this.experiences)
-      .then(data => {
 
-        console.log(data);
-      });
+    for (let experience of this.experiences) {
+
+      this.restProvider.sendExperiences(experience)
+        .then(data => {
+          console.log(data);
+          const index = this.experiences.indexOf(experience);
+          console.log(index);
+          this.experiences.splice(index, 1);
+
+          console.log(this.experiences);
+
+          this.nativeStorage.setItem('experiences', this.experiences);
+
+        });
+
+    }
+
+    this.presentToast();
+
+
   }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Experiencias enviadas',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+
+    });
+
+    toast.present();
+  }
+
+
 }

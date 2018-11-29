@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController} from 'ionic-angular';
+import {IonicPage, NavController, ToastController} from 'ionic-angular';
 import {NativeStorage} from "@ionic-native/native-storage";
 import {HomePage} from "../home/home";
+import * as firebase from 'firebase';
 
 /**
  * Generated class for the ExperienciaPage tabs.
@@ -25,13 +26,15 @@ export class ExperienciaPage {
   audio1Root = 'Audio1Page'
   audio2Root = 'Audio2Page'
   experiences = new Array();
-  experience = {};
+  experience = <any>{};
+  user: any = [];
 
-  constructor(public navCtrl: NavController, private nativeStorage: NativeStorage) {
+  constructor(public navCtrl: NavController, private nativeStorage: NativeStorage,
+              private toastCtrl: ToastController) {
+    this.user = firebase.auth().currentUser;
   }
 
   saveExperience() {
-    console.log(this.experience);
 
     this.nativeStorage.getItem('experiences')
       .then(
@@ -42,14 +45,39 @@ export class ExperienciaPage {
 
   }
 
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Experiencia guardada satisfactoriamente',
+      duration: 1000,
+      position: 'bottom'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+      this.gotoHome()
+    });
+
+    toast.present();
+  }
+
+  gotoHome(){
+    this.navCtrl.push(HomePage);
+  }
   saveSuccess() {
     console.log('Stored item!');
-    this.navCtrl.push(HomePage);
+    this.presentToast();
+
   }
 
   addItem(data) {
 
-    this.experiences = data;
+    if(data==null){
+      this.experiences=new Array();
+    }else{
+      this.experiences = data;
+    }
+
+    this.experience.user =  this.user.email;
     this.experiences.push(this.experience);
 
     this.nativeStorage.setItem('experiences', this.experiences)

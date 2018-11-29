@@ -23,6 +23,8 @@ import {NativeStorage} from "@ionic-native/native-storage";
 import {ExperienciaPage} from "../pages/experiencia/experiencia";
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
+import {CallNumber} from "@ionic-native/call-number";
+import {CallsPage} from "../pages/calls/calls";
 
 // add your info here
 export const firebaseConfig = {
@@ -51,7 +53,8 @@ export const firebaseConfig = {
     LoginPage,
     ForgotPage,
     RegisterPage,
-    ExperiencesPage
+    ExperiencesPage,
+    CallsPage
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,15 +63,18 @@ export const firebaseConfig = {
     LoginPage,
     ForgotPage,
     RegisterPage,
-    ExperiencesPage
+    ExperiencesPage,
+    CallsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Media,
     Auth,
+    File,
     NativeStorage,
-    RestProvider
+    RestProvider,
+    CallNumber
   ]
 })
 export class AppModule { }

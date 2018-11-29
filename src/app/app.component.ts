@@ -9,6 +9,7 @@ import { LoginPage } from '../pages/login/login';
 import {HomePage} from "../pages/home/home";
 import {ExperienciaPage} from "../pages/experiencia/experiencia";
 import {ExperiencesPage} from "../pages/experiences/experiences";
+import {CallsPage} from "../pages/calls/calls";
 
 @Component({
   template: `<ion-menu [content]="content" persistent="true">
@@ -29,7 +30,7 @@ import {ExperiencesPage} from "../pages/experiences/experiences";
   </ion-menu>
 
   <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
-  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>`
+  <ion-nav [root]="rootPage" #content swipeBackEnabled="true"></ion-nav>`
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -46,7 +47,8 @@ export class MyApp {
       // used for an example of ngFor and navigation
       this.pages = [
         { title: 'Home', component: HomePage },
-        { title: 'EXperiencias de llamada', component: ExperiencesPage },
+        { title: 'Llamadas', component: CallsPage },
+        { title: 'Experiencias de llamada', component: ExperiencesPage },
 
       ];
     });
