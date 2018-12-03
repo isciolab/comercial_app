@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
 import {Media, MediaObject} from '@ionic-native/media';
 import {File} from '@ionic-native/file';
 import {ExperienciaPage} from '../experiencia/experiencia';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
 /**
  * Generated class for the Audio1Page page.
@@ -54,14 +55,15 @@ export class Audio1Page {
   startRecord() {
     console.log(this.platform.is('android'));
     if (this.platform.is('ios')) {
-      this.fileName = 'record' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.wav';
+      this.fileName = 'record' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gp';
       this.filePath = this.file.documentsDirectory.replace(/file:\/\//g, '') + this.fileName;
       this.audio = this.media.create(this.filePath);
     } else if (this.platform.is('android')) {
-      this.fileName = 'record' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.wav';
+      this.fileName = 'record' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gp';
       this.filePath = this.file.externalDataDirectory.replace(/file:\/\//g, '') + this.fileName;
       this.audio = this.media.create(this.filePath);
     }
+
 
     try {
       console.log('grabando');
@@ -81,19 +83,23 @@ export class Audio1Page {
   }*/
   stopRecord() {
     this.audio.stopRecord();
-
-
-
-    let data = {filename: this.fileName, filepath: this.filePath, file: this.audio};
+    this.audio.release();
+    let data = {filename: this.fileName, filepath: this.filePath, file: this.audio,
+      pathshort:this.file.externalDataDirectory};
     this.audioList = [];
     this.experience.audio1 = data;
     this.audioList.push(data);
 
+    console.log(this.audio);
     //localStorage.setItem("audiolist", JSON.stringify(this.audioList));
     this.zone.run(() => {
       this.recording = false;
     });
 
+
+
+
+    //this.audio.release();
     this.getAudioList();
   }
 

@@ -55,18 +55,7 @@ export class ExperiencesPage {
 
     for (let experience of this.experiences) {
 
-      this.restProvider.sendExperiences(experience)
-        .then(data => {
-          console.log(data);
-          const index = this.experiences.indexOf(experience);
-          console.log(index);
-          this.experiences.splice(index, 1);
-
-          console.log(this.experiences);
-
-          this.nativeStorage.setItem('experiences', this.experiences);
-
-        });
+      this.restProvider.sendExperiences(experience);
 
     }
 
