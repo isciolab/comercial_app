@@ -43,6 +43,7 @@ export class RestProvider {
 
         //formData.append('uploaded_file', binary);
 
+
         // same till reasAsDataUrl
         this.file.readAsDataURL(exp.audio1.pathshort, exp.audio1.filename).then((result) => {
           console.log(result);
