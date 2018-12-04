@@ -4,6 +4,7 @@ import {Media, MediaObject} from '@ionic-native/media';
 import {RestProvider} from "../../providers/rest/rest";
 
 import {File} from '@ionic-native/file';
+import {HomePage} from "../home/home";
 /**
  * Generated class for the CallsPage page.
  *
@@ -20,12 +21,19 @@ import {File} from '@ionic-native/file';
   templateUrl: 'calls.html',
 })
 export class CallsPage {
+  filePath: string;
+  audio: MediaObject;
   audioList: any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private file: File, private zone: NgZone, private media: Media ,
-    private toastCtrl: ToastController,
+    private toastCtrl: ToastController,   public platform: Platform,
               public restProvider: RestProvider) {
+   // localStorage.setItem('calllist', JSON.stringify( []));
+  }
+
+  gotoHome() {
+    this.navCtrl.push(HomePage);
   }
 
   ionViewDidLoad() {
@@ -86,5 +94,15 @@ export class CallsPage {
     toast.present();
   }
 
-
+  playAudio(file, idx) {
+    if (this.platform.is('ios')) {
+      this.filePath = this.file.documentsDirectory.replace(/file:\/\//g, '') + file;
+      this.audio = this.media.create(this.filePath);
+    } else if (this.platform.is('android')) {
+      this.filePath = this.file.externalDataDirectory.replace(/file:\/\//g, '') + file;
+      this.audio = this.media.create(this.filePath);
+    }
+    this.audio.play();
+    this.audio.setVolume(0.8);
+  }
 }

@@ -7,7 +7,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>calls</ion-title>
+    <ion-buttons left>
+      <button ion-button small clear icon-end icon-only (click)="gotoHome()">
+        <ion-icon name='md-home'></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Llamadas</ion-title>
     <ion-buttons end>
       <button ion-button small clear icon-end icon-only (click)="sendCalls()">
         <ion-icon name='md-sync'></ion-icon>

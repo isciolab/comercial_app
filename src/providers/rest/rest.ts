@@ -139,16 +139,16 @@ export class RestProvider {
     formData.append('user', call.user);
     formData.append('origin_number', call.origin_number ? call.origin_number : '');
     formData.append('location', call.location ? call.location : '');
-    if (call.audio != undefined) {
+    if (call.filename != undefined) {
       try {
-        console.log(call.audio);
-        formData.append('audio1', call.audio.filename);
 
-        this.file.readAsDataURL(call.audio1.pathshort, call.audio.filename).then((result) => {
+        formData.append('audio1', call.filename);
+
+        this.file.readAsDataURL(call.pathshort, call.filename).then((result) => {
           console.log(result);
           let blob = new Blob([result], {type: "audio/3gpp"});
           console.log(blob);
-          formData.append('uploaded_file', blob, call.audio.filename);
+          formData.append('uploaded_file', blob, call.filename);
           return this.makerequestCall(headers, formData)
             .then(data => {
               return data;

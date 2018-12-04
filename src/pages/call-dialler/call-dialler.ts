@@ -3,7 +3,7 @@ import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
 import {CallNumber} from "@ionic-native/call-number";
 import {Media, MediaObject} from '@ionic-native/media';
 import {File} from '@ionic-native/file';
-
+import * as firebase from 'firebase';
 /**
  * Generated class for the CallDiallerPage page.
  *
@@ -27,11 +27,12 @@ export class CallDiallerPage {
   fileName: string;
   audio: MediaObject;
   audioList: any[] = [];
-
+  user: any = [];
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private callNumber: CallNumber, private media: Media,
               public platform: Platform,
               private file: File, private zone: NgZone) {
+    this.user = firebase.auth().currentUser;
 
   }
 
@@ -94,7 +95,7 @@ export class CallDiallerPage {
       let duration = this.audio.getDuration();
 
       let data = {filename: this.fileName, filepath: this.filePath, file: this.audio,
-        phonenumber:this.phoneNumber, duration:duration,  pathshort:this.file.externalDataDirectory};
+        phonenumber:this.phoneNumber, duration:duration,  pathshort:this.file.externalDataDirectory, user:  this.user.email};
 
       console.log(data);
       this.audioList.push(data);
@@ -112,15 +113,5 @@ export class CallDiallerPage {
     }
   }
 
-  playAudio(file, idx) {
-    if (this.platform.is('ios')) {
-      this.filePath = this.file.documentsDirectory.replace(/file:\/\//g, '') + file;
-      this.audio = this.media.create(this.filePath);
-    } else if (this.platform.is('android')) {
-      this.filePath = this.file.externalDataDirectory.replace(/file:\/\//g, '') + file;
-      this.audio = this.media.create(this.filePath);
-    }
-    this.audio.play();
-    this.audio.setVolume(0.8);
-  }
+
 }
