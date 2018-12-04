@@ -93,7 +93,8 @@ export class CallDiallerPage {
       this.audio.stopRecord();
       let duration = this.audio.getDuration();
 
-      let data = {filename: this.fileName, filepath: this.filePath, file: this.audio, phonenumber:this.phoneNumber, duration:duration};
+      let data = {filename: this.fileName, filepath: this.filePath, file: this.audio,
+        phonenumber:this.phoneNumber, duration:duration,  pathshort:this.file.externalDataDirectory};
 
       console.log(data);
       this.audioList.push(data);

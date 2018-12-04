@@ -54,11 +54,11 @@ export class Audio2Page {
   startRecord() {
     console.log(this.platform.is('android'));
     if (this.platform.is('ios')) {
-      this.fileName = 'record' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.wav';
+      this.fileName = 'record' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gpp';
       this.filePath = this.file.documentsDirectory.replace(/file:\/\//g, '') + this.fileName;
       this.audio = this.media.create(this.filePath);
     } else if (this.platform.is('android')) {
-      this.fileName = 'record' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.wav';
+      this.fileName = 'record' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gpp';
       this.filePath = this.file.externalDataDirectory.replace(/file:\/\//g, '') + this.fileName;
       this.audio = this.media.create(this.filePath);
     }
@@ -81,7 +81,7 @@ export class Audio2Page {
   }*/
   stopRecord() {
     this.audio.stopRecord();
-    let data = {filename: this.fileName, filepath: this.filePath, file: this.audio};
+    let data = {filename: this.fileName, filepath: this.filePath, file: this.audio,   pathshort:this.file.externalDataDirectory};
     this.audioList = [];
     this.experience.audio2 = data;
     this.audioList.push(data);
