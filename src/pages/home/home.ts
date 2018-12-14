@@ -1,14 +1,17 @@
 import {Component} from '@angular/core';
-import {MenuController, NavController} from 'ionic-angular';
+import {IonicPage, MenuController, NavController} from 'ionic-angular';
 import {Auth} from '../../providers/auth/auth';
 import {LoginPage} from '../login/login';
 import {CallNumber} from '@ionic-native/call-number';
 import * as firebase from "firebase";
-import { AngularFireAuth } from 'angularfire2/auth';
+import {AngularFireAuth} from 'angularfire2/auth';
+
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
   //private rootPage: any = StartPage;
 

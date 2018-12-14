@@ -17,9 +17,9 @@
 <ion-content padding class="home">
   <h2>Bienvenido {{user.email}}</h2>
 
-  <a ion-button full round href="#/call-dialler" >Llamar cliente</a>
+  <a *ngIf=" this.user.email != 'director@isciolab.com'" ion-button full round href="#/call-dialler" >Llamar cliente</a>
 
-  <a ion-button full round href="#/experience">Registrar experiencia de reunion</a>
+  <a *ngIf=" this.user.email != 'director@isciolab.com'" ion-button full round href="#/experience">Registrar experiencia de reunion</a>
 
 
 </ion-content>

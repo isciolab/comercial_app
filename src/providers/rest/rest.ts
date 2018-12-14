@@ -30,6 +30,7 @@ export class RestProvider {
     formData.append('lugar', exp.lugar);
     formData.append('cliente', exp.cliente);
     formData.append('user', exp.user);
+     formData.append('fecha', exp.fecha);
     formData.append('pediste_info', exp.pediste_datos ? '1' : '0');
     if (exp.audio1 != undefined) {
       try {
@@ -46,7 +47,10 @@ export class RestProvider {
           if (exp.audio2 != undefined) {
             try {
 
+              formData.append('audio2', exp.audio2.filename);
+
               this.file.readAsDataURL(exp.audio2.pathshort, exp.audio2.filename).then((result2) => {
+
 
                 let blob2 = new Blob([result2], {type: "audio/3gpp"});
 
@@ -85,7 +89,7 @@ export class RestProvider {
 
           this.file.readAsDataURL(exp.audio2.pathshort, exp.audio2.filename).then((result2) => {
 
-            let blob2 = new Blob([result2], {type: "audio/x-wav"});
+            let blob2 = new Blob([result2], {type: "audio/3gpp"});
 
             formData.append('uploaded_file2', blob2, exp.audio2.filename);
 
@@ -137,6 +141,7 @@ export class RestProvider {
     formData.append('addressee', call.phonenumber);
     formData.append('duration_call', call.duration);
     formData.append('user', call.user);
+      formData.append('fecha', call.fecha);
     formData.append('origin_number', call.origin_number ? call.origin_number : '');
     formData.append('location', call.location ? call.location : '');
     if (call.filename != undefined) {
@@ -184,4 +189,52 @@ export class RestProvider {
   }
 
 
+  getCallsFills(comercial, desde, hasta, urlA) {
+
+    
+    let headers = new HttpHeaders().set('Content-Type', 'multipart/form-data;boundary=----');
+    //.set('Accept', 'application/json');
+    let formData = new FormData();
+
+    formData.append('comercial', comercial);
+    formData.append('desde', desde);
+    formData.append('hasta', hasta);
+  
+
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + urlA, formData, {
+        headers: headers
+      }).subscribe(res => {
+        resolve(res);
+      }, (err) => {
+        reject(err);
+      });
+    });
+  }
+
+  getCallsPromedio(comercial, desde, hasta, urlA) {
+
+    
+    let headers = new HttpHeaders().set('Content-Type', 'multipart/form-data;boundary=----');
+    //.set('Accept', 'application/json');
+    let formData = new FormData();
+
+    formData.append('comercial', comercial);
+    formData.append('desde', desde);
+    formData.append('hasta', hasta);
+  
+
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiUrl + urlA).subscribe(res => {
+        resolve(res);
+      }, (err) => {
+        reject(err);
+      });
+    });
+  }
+
+
 }
+
+
+

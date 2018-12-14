@@ -3,6 +3,7 @@ import {IonicPage, NavController, ToastController} from 'ionic-angular';
 import {NativeStorage} from "@ionic-native/native-storage";
 import {HomePage} from "../home/home";
 import * as firebase from 'firebase';
+import {RestProvider} from "../../providers/rest/rest";
 
 /**
  * Generated class for the ExperienciaPage tabs.
@@ -30,24 +31,40 @@ export class ExperienciaPage {
   user: any = [];
 
   constructor(public navCtrl: NavController, private nativeStorage: NativeStorage,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController, public restProvider: RestProvider) {
     this.user = firebase.auth().currentUser;
   }
 
   saveExperience() {
 
-    this.nativeStorage.getItem('experiences')
-      .then(
-        data => this.addItem(data),
-        error => this.addItem(new Array())
-      );
+    this.sendExperience();
 
 
   }
 
-  presentToast() {
+
+  sendExperience() {
+
+
+    this.experience.user = this.user.email;
+    this.experience.fecha=  new Date().toISOString();
+
+
+    this.restProvider.sendExperiences(this.experience)
+      .then(data => {
+        this.presentToast("Experiencia enviada a servidor");
+      }).catch(e => {
+      this.addItem()
+      this.presentToast("Error al enviar la experiencia, se ha guardado en el dispositivo");
+
+    });
+
+  }
+
+
+  presentToast(message) {
     let toast = this.toastCtrl.create({
-      message: 'Experiencia guardada satisfactoriamente',
+      message: message,
       duration: 1000,
       position: 'bottom'
     });
@@ -60,30 +77,34 @@ export class ExperienciaPage {
     toast.present();
   }
 
-  gotoHome(){
+  gotoHome() {
+
     this.navCtrl.push(HomePage);
   }
+
   saveSuccess() {
     console.log('Stored item!');
-    this.presentToast();
+
 
   }
 
-  addItem(data) {
+  addItem() {
 
-    if(data==null){
-      this.experiences=new Array();
-    }else{
-      this.experiences = data;
-    }
-
-    this.experience.user =  this.user.email;
-    this.experiences.push(this.experience);
-
-    this.nativeStorage.setItem('experiences', this.experiences)
+    this.nativeStorage.getItem('experiences')
       .then(
-        () => this.saveSuccess(),
-        error => console.error('Error storing item', error)
-      );
+        data => function (data) {
+          if (data == null) {
+            this.experiences = new Array();
+          } else {
+            this.experiences = data;
+          }
+
+          this.experiences.push(this.experience);
+
+          this.nativeStorage.setItem('experiences', this.experiences).then(
+            () => this.saveSuccess(),
+            error => console.error('Error storing item', error)
+          );
+        });
   }
 }

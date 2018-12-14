@@ -11,6 +11,8 @@ import {ExperienciaPage} from "../pages/experiencia/experiencia";
 import {ExperiencesPage} from "../pages/experiences/experiences";
 import {CallsPage} from "../pages/calls/calls";
 
+import {Graphic2Page} from "../pages/graphic2/graphic2";
+import {GraficosentimientoPage} from '../pages/graficosentimiento/graficosentimiento';
 @Component({
   template: `<ion-menu [content]="content" persistent="true">
     <ion-header>
@@ -29,11 +31,12 @@ import {CallsPage} from "../pages/calls/calls";
 
   </ion-menu>
 
-  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <!-- Disable swipe-to-go-back because its poor UX to combine STGB with side menus -->
   <ion-nav [root]="rootPage" #content swipeBackEnabled="true"></ion-nav>`
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
+  user:any;
   rootPage : any =  LoginPage;
   pages: Array<{ title: string, component: any }>;
 
@@ -43,16 +46,31 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      this.user =localStorage.getItem("userEmail");
 
-      // used for an example of ngFor and navigation
-      this.pages = [
-        { title: 'Home', component: HomePage },
-        { title: 'Llamadas', component: CallsPage },
-        { title: 'Experiencias de llamada', component: ExperiencesPage },
 
-      ];
-    });
-  }
+      console.log(this.user);
+
+      if(this.user =='director@isciolab.com'){
+            // used for an example of ngFor and navigation
+            this.pages = [
+              
+              { title: 'Evolucion del sentimiento', component: GraficosentimientoPage },
+              { title: 'Duracion de la llamada', component: Graphic2Page },
+
+            ];
+      }else{
+
+            this.pages = [
+              { title: 'Home', component: HomePage },
+              { title: 'Llamadas', component: CallsPage },
+              { title: 'Experiencias de llamada', component: ExperiencesPage },
+            
+
+            ];
+          }
+          });
+        }
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario

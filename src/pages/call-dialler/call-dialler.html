@@ -22,22 +22,35 @@
 
 
   <ion-item>
-    <ion-label floating>Número de teléfono</ion-label>
-    <ion-input type="tel" [(ngModel)]="phoneNumber"></ion-input>
+
+      <ion-label stacked>Número de teléfono</ion-label>
+      <ion-input required=""  type="tel" [(ngModel)]="phoneNumber"></ion-input>
+
+
+      <button  type="button" default color="secondary" ion-button icon-only (click)="llamar()" item-end="" >
+        <ion-icon name="call"></ion-icon>
+      </button>
+
   </ion-item>
 
-  <!--<ion-list>
-    <ion-item *ngFor="let audio of audioList; index as i;">
-      <p>{{audio.filename}}</p>
-      <button ion-button clear item-end large (click)="playAudio(audio.filename, i)">
-        <ion-icon name="play"></ion-icon>
-      </button>
+
+  <ion-list>
+    <ion-item *ngFor="let contacto of listaContactos">
+      <ion-avatar item-start>
+        <img [src]="contacto.photos[0].value ">
+      </ion-avatar>
+      <h2>{{contacto.displayName }}</h2>
+      <p>{{contacto.phoneNumbers[0].type}} - Numero: {{contacto.phoneNumbers[0].value}}</p>
+      <ion-icon color="secondary" (click)="selectContact(contacto.phoneNumbers[0].value)" item-end="" name="call"
+                role="img"
+                class="icon item-icon" aria-label="call"></ion-icon>
     </ion-item>
-  </ion-list>-->
-  <ion-fab bottom right>
-    <button ion-fab (click)="llamar()">
-      <ion-icon name="md-call"></ion-icon>
-    </button>
-  </ion-fab>
-  <button ion-button primary (click)="stopRecord()" *ngIf="recording"><ion-icon name="mic-off"></ion-icon>&nbsp;&nbsp;Stop Record</button>
+
+
+  </ion-list>
+
+
+  <!--<button ion-button primary (click)="stopRecord()" *ngIf="recording">
+    <ion-icon name="mic-off"></ion-icon>&nbsp;&nbsp;Stop Record
+  </button>-->
 </ion-content>
