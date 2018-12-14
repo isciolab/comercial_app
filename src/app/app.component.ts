@@ -55,6 +55,7 @@ export class MyApp {
             // used for an example of ngFor and navigation
             this.pages = [
               
+              
               { title: 'Evolucion del sentimiento', component: GraficosentimientoPage },
               { title: 'Duracion de la llamada', component: Graphic2Page },
 

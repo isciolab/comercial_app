@@ -56,7 +56,7 @@ export class LoginPage {
 
       this.authData.loginUser(this.loginForm.value.email, this.loginForm.value.password).then((authData: any) => {
           localStorage.setItem("userEmail", this.loginForm.value.email);
-          this.local
+          
           this.loadingController.dismiss();
           this.nav.push(HomePage);
         }

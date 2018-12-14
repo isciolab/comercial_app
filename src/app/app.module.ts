@@ -65,10 +65,7 @@ export const firebaseConfig = {
     ForgotPage,
     RegisterPage,
     ExperiencesPage,
-    CallsPage,
-  
-    Graphic2Page,
-    GraficosentimientoPage
+    CallsPage
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -78,10 +75,7 @@ export const firebaseConfig = {
     ForgotPage,
     RegisterPage,
     ExperiencesPage,
-    CallsPage,
-   
-    Graphic2Page,
-    GraficosentimientoPage
+    CallsPage
 
   ],
   providers: [
