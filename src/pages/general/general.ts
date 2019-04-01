@@ -17,12 +17,14 @@ import {HomePage} from "../home/home";
 export class GeneralPage {
   @Input() parent;
   experience = {};
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController, public navParams: NavParams,  
               @Inject(forwardRef(() => ExperienciaPage)) private _parent:ExperienciaPage) {
     this.experience = _parent.experience;
   }
 
   ionViewDidLoad() {
+
+   
     console.log('ionViewDidLoad GeneralPage');
   }
 

@@ -88,8 +88,17 @@ export class CallDiallerPage {
     function stopRecord() {
       try {
         console.log('stoping ...');
+
         audio.stopRecord();
-        let duration = audio.getDuration();
+        let duration =0;
+        audio.setVolume(0.0);
+        audio.play();
+        setTimeout(function(){ 
+
+        audio.stop();
+        audio.setVolume(1.0);
+        duration = audio.getDuration();
+        
 
         let data = {
           filename: fileName,
@@ -108,6 +117,9 @@ export class CallDiallerPage {
           recording = false;
         });
         sendCall();
+
+         }, 500);
+        
         // presentToast();
         //this.getAudioList();
       }

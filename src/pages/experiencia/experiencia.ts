@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import {IonicPage, NavController, ToastController} from 'ionic-angular';
 import {NativeStorage} from "@ionic-native/native-storage";
 import {HomePage} from "../home/home";
@@ -30,7 +30,7 @@ export class ExperienciaPage {
   experience = <any>{};
   user: any = [];
 
-  constructor(public navCtrl: NavController, private nativeStorage: NativeStorage,
+  constructor(public navCtrl: NavController, private nativeStorage: NativeStorage,  private zone: NgZone, 
               private toastCtrl: ToastController, public restProvider: RestProvider) {
     this.user = firebase.auth().currentUser;
   }
@@ -40,6 +40,15 @@ export class ExperienciaPage {
     this.sendExperience();
 
 
+  }
+
+
+ ionViewDidLoad() {
+       this.zone.run(() => {
+          this.experience = {};
+        });
+   
+    console.log('ionViewDidLoad GeneralPage');
   }
 
 

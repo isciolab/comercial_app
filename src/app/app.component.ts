@@ -12,6 +12,10 @@ import {ExperiencesPage} from "../pages/experiences/experiences";
 import {CallsPage} from "../pages/calls/calls";
 
 import {Graphic2Page} from "../pages/graphic2/graphic2";
+
+import {Graphic1Page} from "../pages/graphic1/graphic1";
+
+import {Graphic3Page} from "../pages/graphic3/graphic3";
 import {GraficosentimientoPage} from '../pages/graficosentimiento/graficosentimiento';
 @Component({
   template: `<ion-menu [content]="content" persistent="true">
@@ -56,7 +60,8 @@ export class MyApp {
             this.pages = [
               
               
-              { title: 'Evolucion del sentimiento', component: GraficosentimientoPage },
+              { title: 'Evolucion del sentimiento llamada', component: Graphic1Page },
+               { title: 'Evolucion del sentimiento experiencia', component: Graphic3Page },
               { title: 'Duracion de la llamada', component: Graphic2Page },
 
             ];
